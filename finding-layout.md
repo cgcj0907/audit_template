@@ -1,8 +1,8 @@
 ### [S-#] TITLE (Root + Impact)
-#### Description:
+**Description**
 
-#### Impact:
+**Impact**
 
-#### Proof of Concepts:
+**Proof of Concepts**
 
-#### Recommended mitigation:
+**Recommended mitigation**
