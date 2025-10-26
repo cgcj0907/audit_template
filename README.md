@@ -27,10 +27,10 @@ perl ./install-tl --no-interaction
 Finally, prepend /usr/local/texlive/YYYY/bin/PLATFORM to your PATH,
 e.g., /usr/local/texlive/2025/bin/x86_64-linux
 
-## Step 2:write your markdown file 
+## Step 2: Write your markdown file 
 * maybe you can use my finding-layout.md or use yours
 
-## Step 3:custom my content.md with your details, like your name, your_log.pdf,et.
+## Step 3: Custom my content.md with your details, like your name, your_log.pdf,et.
 
 ```markdown
 ---
@@ -42,7 +42,7 @@ titlepage: true
 ---
 ```
 
-## Step 4:execute the follow commands in your shell
+## Step 4: Execute the follow commands in your shell
 ```
 pandoc content.md \
   --from markdown \
