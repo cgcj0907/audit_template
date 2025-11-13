@@ -1,158 +1,42 @@
-\documentclass[a4paper,12pt]{report} % 使用 report 文档类，适合长文档/报告
+\documentclass[a4paper,12pt]{0907}
 
-% =======================
-% ======= Packages ======
-% =======================
-\usepackage[english]{babel}        % 英文排版
-\usepackage{graphicx}              % 插入图片
-\usepackage{fancyhdr}              % 页眉页脚
-\usepackage{lastpage}              % 引用文档总页数
-\usepackage[hidelinks]{hyperref}   % 超链接（去掉方框）
-\usepackage{float}                 % 控制浮动对象位置
-\usepackage{geometry}              % 页面边距
-\usepackage{listings}              % 代码高亮
-\usepackage{longtable}             % 支持跨页表格（Pandoc Markdown 输出表格）
-\usepackage{booktabs}              % 美化表格横线
-\usepackage[table,xcdraw]{xcolor}  % 支持表格与页面颜色
 
-% =======================
-% ===== Listings 设置 ===
-% =======================
-\lstset{
-    basicstyle=\ttfamily\small,          % 基本字体
-    keywordstyle=\color{blue}\bfseries,  % 关键字样式
-    commentstyle=\color{green},          % 注释样式
-    stringstyle=\color{red},             % 字符串样式
-    numbers=left,                        % 显示行号
-    numberstyle=\tiny\color{gray},       % 行号样式
-    frame=single,                        % 边框样式
-    breaklines=true                      % 自动换行
-}
+% 如果你想在文档级别加入额外包，可在这里添加
+% \usepackage{...}
 
-% =======================
-% ===== Pandoc fix ======
-% =======================
-% 修复 Pandoc 输出 Markdown 的 \tightlist undefined 问题
-\providecommand{\tightlist}{%
-  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 
-% =======================
-% ===== Page Layout =====
-% =======================
-\geometry{
-    top=2.5cm,
-    bottom=2.5cm,
-    left=2.5cm,
-    right=2.5cm
-}
-
-% =======================
-% ===== Header/Footer ===
-% =======================
-% 黑条 + 大 logo + 白色页码
-\usepackage{tikz}
-\usepackage{etoolbox}
-\usetikzlibrary{backgrounds}
-
-% 黑条高度
-\newlength{\headbarheight}
-\setlength{\headbarheight}{2.0cm}
-
-\pagestyle{fancy}
-\fancyhf{}
-
-% ---------- 普通页眉 ----------
-\fancyhead[L]{%
-  \begin{tikzpicture}[remember picture,overlay,on background layer]
-    % 黑色背景条
-    \fill[black] (current page.north west)
-      rectangle ([yshift=-\headbarheight]current page.north east);
-
-    % 左侧 logo（垂直居中）
-    \node[anchor=west, inner sep=0]
-      at ([xshift=1.5cm,yshift=-0.5\headbarheight]current page.north west) {%
-        \includegraphics[height=1.6cm]{cover.pdf}};
-  \end{tikzpicture}%
-}
-
-% ---------- 页眉右上角：白色页码 ----------
-\fancyhead[R]{%
-  \begin{tikzpicture}[remember picture,overlay]
-    \node[anchor=east, text=white, font=\normalsize\bfseries]
-      at ([xshift=-1.5cm,yshift=-0.5\headbarheight]current page.north east)
-      {\thepage};
-  \end{tikzpicture}%
-}
-
-% ---------- 调整间距 ----------
-\setlength{\headheight}{\headbarheight}
-\setlength{\headsep}{1.2cm}
-
-% ---------- Chapter 起始页同样样式 ----------
-\fancypagestyle{plain}{%
-  \fancyhf{}
-  \fancyhead[L]{%
-    \begin{tikzpicture}[remember picture,overlay,on background layer]
-      \fill[black] (current page.north west)
-        rectangle ([yshift=-\headbarheight]current page.north east);
-      \node[anchor=west, inner sep=0]
-        at ([xshift=1.5cm,yshift=-0.5\headbarheight]current page.north west) {%
-          \includegraphics[height=1.6cm]{cover.pdf}};
-    \end{tikzpicture}%
-  }
-  \fancyhead[R]{%
-    \begin{tikzpicture}[remember picture,overlay]
-      \node[anchor=east, text=white, font=\normalsize\bfseries]
-        at ([xshift=-1.5cm,yshift=-0.5\headbarheight]current page.north east)
-        {\thepage};
-    \end{tikzpicture}%
-  }
-}
-
-% 去掉默认页眉线
-\renewcommand{\headrulewidth}{0pt}
-\renewcommand{\footrulewidth}{0pt}
-
-% =======================
-% ===== Hyperlinks ======
-% =======================
-\hypersetup{
-    colorlinks=true,  % 启用彩色链接
-    linkcolor=blue,   % 内部链接颜色
-    urlcolor=blue,    % URL 链接颜色
-    citecolor=blue    % 文献引用颜色
-}
-
-% =======================
-% ===== Title Page ======
-% =======================
 \begin{document}
+
 
 $if(titlepage)$
 \begin{titlepage}
   \pagecolor{black}   % 封面黑底
   \color{white}       % 白色文字
-
-  \vspace*{3cm}
-  \includegraphics[width=0.6\textwidth]{cover.pdf} \\[2cm] % 放大 logo
-  {\Huge\bfseries $title$ \\[1cm]}
-  {\Large Prepared by: $author$ \\[0.5cm]}
+  \centering
+  \vspace*{1.5cm}
+  
+  \includegraphics[width=0.5\textwidth]{cover.pdf} \\[1.5cm]
+  
+  {\Huge\bfseries $title$ \\[0.8cm]}
+  
+  {\Large Prepared by: $author$ \\[0.3cm]}
   {\Large Date: $date$}
+  
   \vfill
 \end{titlepage}
 $endif$
 
-% =======================
-% ===== Document Body ===
-% =======================
+
+
 \pagecolor{white}
 \color{black}
 
-% ---------- 目录 ----------
+
 \tableofcontents
 \newpage
 
-% ---------- 正文 ----------
+
 $body$
+
 
 \end{document}

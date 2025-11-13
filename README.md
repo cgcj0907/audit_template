@@ -51,5 +51,5 @@ pandoc content.md \
   --output=audit-report.pdf \
   --pdf-engine=xelatex \
   --top-level-division=chapter \
-  --syntax-highlighting=idiomatic
+  --syntax-highlighting=pygments
 ```
